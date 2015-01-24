@@ -8,8 +8,9 @@
     _.each(elevators, function(elevator) {
 
       elevator.on("idle", function() {
-        elevator.goingDownIndicator(true);
-        elevator.goToFloor(0);
+         setTimeout(function() { elevator.stop(); }, 5000);
+        // elevator.goingDownIndicator(true);
+        // elevator.goToFloor(0);
       });
 
       elevator.on("floor_button_pressed", function(floorNum) {
