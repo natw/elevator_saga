@@ -8,6 +8,7 @@
     _.each(elevators, function(elevator) {
 
       elevator.on("idle", function() {
+        elevator.goingDownIndicator(true);
         elevator.goToFloor(0);
       });
 
@@ -22,7 +23,14 @@
           requestQueue[direction] = _.without(requestQueue[direction], floorNum)
         }
       });
-      elevator.on("stopped_at_floor", function(floorNum) { });
+      elevator.on("stopped_at_floor", function(floorNum) {
+        if (elevator.destinationQueue[0] > floorNum) {
+          elevator.goingUpIndicator(true);
+        } else {
+          elevator.goingDownIndicator(true);
+        }
+
+      });
     });
 
     _.each(floors, function(floor) {
