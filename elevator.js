@@ -24,10 +24,13 @@
         }
       });
       elevator.on("stopped_at_floor", function(floorNum) {
-        if (elevator.destinationQueue[0] > floorNum) {
+        var dest = elevator.destinationQueue[0];
+        if (dest > floorNum) {
           elevator.goingUpIndicator(true);
+          requestQueue.up = _.without(requestQueue.up, dest);
         } else {
           elevator.goingDownIndicator(true);
+          requestQueue.down = _.without(requestQueue.down, dest);
         }
 
       });
