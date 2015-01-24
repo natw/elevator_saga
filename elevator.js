@@ -8,19 +8,7 @@
     _.each(elevators, function(elevator) {
 
       elevator.on("idle", function() {
-        console.log("start idle");
-        var firstUp = requestQueue.up.shift();
-        if (firstUp === undefined) {
-          var firstDown = requestQueue.down.shift();
-          if (firstDown === undefined) {
-            elevator.stop();
-          } else {
-            elevator.goToFloor(firstDown);
-          }
-        } else {
-          elevator.goToFloor(firstUp);
-        }
-        console.log("end idle");
+        elevator.goToFloor(0);
       });
 
       elevator.on("floor_button_pressed", function(floorNum) {
